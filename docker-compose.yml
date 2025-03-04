@@ -1,0 +1,41 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    volumes:
+      - ./project:/var/www
+    networks:
+      - home
+
+  server:
+    image: nginx:1.27-bookworm
+    container_name: nginx_server
+    ports:
+      - "8000:80"
+    volumes:
+      - ./server/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./project:/var/www
+    networks:
+      - home
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_8_0
+    environment:
+      MYSQL_DATABASE: todo
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - m2t:/var/lib/mysql
+    networks:
+      - home
+
+networks:
+  home:
+    driver: bridge
+
+volumes:
+  m2t:
