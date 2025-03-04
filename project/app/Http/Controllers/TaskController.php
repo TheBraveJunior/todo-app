@@ -9,11 +9,11 @@ class TaskController extends Controller
 {
     public function index()
     {
-        if (!auth()->check()){
-            $tasks = Task::where('session_id', session()->getId())->get();
-        }else{
-            return redirect('/admin/tasks');
+        if (backpack_auth()->check()) {
+            return redirect(backpack_url());
         }
+
+        $tasks = Task::where('session_id', session()->getId())->get();
 
         return view('tasks.index', compact('tasks'));
     }
