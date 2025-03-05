@@ -13,3 +13,49 @@
 ### ✅ feat(crud): implement CRUD on Backpack for authorized users
 - Created a full CRUD interface for tasks within the Backpack admin panel for authorized users.
 - Implemented role-based access control to manage task operations securely.
+
+## Running the Project Locally
+
+To run the project locally, please follow these steps:
+
+🚀 **Clone the Repository**  
+First, you need to download or clone the repository. You can do this by running the following command in your terminal:
+
+bash
+git clone https://github.com/TheBraveJunior/todo-app.git
+
+🐳 **Start Docker Containers**  
+Navigate to the project directory (created during the cloning process) and run the Docker containers using the following command:
+
+bash
+cd todo-app
+docker-compose up --build -d
+
+This will set up the environment using the provided `Dockerfile` and `docker-compose.yml` files. The project files are located in the `project` folder and the server configuration (Nginx) is in the `server` folder.
+
+🔄 **Access the App Container**  
+Once the containers are running, access the app container with the following command:
+
+bash
+docker exec -it app bash
+
+🛠️ **Install Dependencies**  
+Inside the app container, run the following command to install the necessary PHP dependencies:
+
+bash
+composer install
+
+📄 **Set Up Environment Variables**  
+Next, create a `.env` file from the example provided:
+
+bash
+cp .env.example .env
+
+🔧 **Run Migrations**  
+Still inside the app container, execute the migration command to set up the database:
+
+bash
+php artisan migrate
+
+🌐 **Access the Project**  
+Finally, open your web browser and navigate to `http://localhost:8000/` to enjoy the project!
